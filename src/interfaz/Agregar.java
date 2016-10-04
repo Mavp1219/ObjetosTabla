@@ -4,13 +4,15 @@
  * and open the template in the editor.
  */
 package interfaz;
+import java.util.ArrayList;
 
 /**
  *
  * @author mvarela6
  */
-public class Agregar extends javax.swing.JDialog {
 
+public class Agregar extends javax.swing.JDialog {
+ArrayList<persona> persona;
     /**
      * Creates new form Agregar
      */
@@ -42,7 +44,7 @@ public class Agregar extends javax.swing.JDialog {
         cmdlimpiar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblpersona = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("AGREGAR PERSONAS");
@@ -77,6 +79,11 @@ public class Agregar extends javax.swing.JDialog {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmdagregar.setText("Agregar");
+        cmdagregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdagregarActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 120, 30));
 
         cmdeliminar.setText("Eliminar");
@@ -90,16 +97,28 @@ public class Agregar extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultados"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblpersona.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
             new String [] {
                 "No.", "Cedula", "Nombre", "Apellido"
             }
-        ));
-        jTable1.setEnabled(false);
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblpersona.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblpersonaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblpersona);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 470, 180));
 
@@ -113,6 +132,21 @@ public class Agregar extends javax.swing.JDialog {
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoActionPerformed
+
+    private void cmdagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdagregarActionPerformed
+       String cedula, nombre, apellido;
+       cedula = txtCedula.getText();
+       nombre = txtNombre.getText();
+        apellido = txtApellido.getText();
+     
+       
+    }//GEN-LAST:event_cmdagregarActionPerformed
+
+    private void tblpersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblpersonaMouseClicked
+
+        int i;
+        i = tb
+    }//GEN-LAST:event_tblpersonaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -168,9 +202,11 @@ public class Agregar extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblpersona;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+  
 }
